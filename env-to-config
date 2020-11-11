@@ -2,10 +2,7 @@
 
 CONF_PATH="$2"
 
-# Get DATABASE_URL explicitly, as it is populated by Heroku automatically
-if [ "$DATABASE_URL" ]; then
-  echo "db-uri=\"${DATABASE_URL}\"" >> $CONF_PATH
-fi
+
 
 #available config options
 config_settings=(
@@ -36,6 +33,11 @@ for conf in "${config_settings[@]}"; do
     fi
   fi
 done
+
+# Get DATABASE_URL explicitly, as it is populated by Heroku automatically
+if [ "$DATABASE_URL" ]; then
+  echo "db-uri=\"${DATABASE_URL}\"" >> $CONF_PATH
+fi
 
 # Bind to correct host and port for Heroku
 echo "server-host=\"0.0.0.0\"" >> $CONF_PATH
