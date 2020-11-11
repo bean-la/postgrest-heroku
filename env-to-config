@@ -2,6 +2,11 @@
 
 CONF_PATH="$2"
 
+# Get DATABASE_URL explicitly, as it is populated by Heroku automatically
+if [ "$DATABASE_URL" ]; then
+  echo "db-uri=\"${DATABASE_URL}\"" >> $CONF_PATH
+fi
+
 #available config options
 config_settings=(
   db-uri
